@@ -49,17 +49,17 @@ function wp_add_custom_rest_fields() {
         )
     );
 
-    // schema for the wp_category_name field
+    // schema for the wp_post_categories field
     $wp_category_name_schema = array(
         'description'   => 'Name of the post category',
         'type'          => 'array',
         'context'       =>   array( 'view' )
     );
 
-    // registering the wp_category_name field
+    // registering the wp_post_categories field
     register_rest_field(
         'post',
-        'wp_category_name',
+        'wp_post_categories',
         array(
             'get_callback'      => 'wp_get_category_name',
             'update_callback'   => null,
@@ -105,7 +105,16 @@ function wp_get_author_name( $object, $field_name, $request ) {
  * @return string                           The name of the category
  */
 function wp_get_category_name( $object, $field_name, $request ) {
-    return get_the_category($object['id']);
+    $category = get_the_category($object['id']);
+    $response = [];
+    foreach ($category as $cat ) {
+        $response[$cat->cat_ID] = [
+            'name' => $cat->name,
+            'url'  => get_category_link( $cat->cat_ID )
+        ];
+    }
+
+    return $response;
 }
 
 /**
