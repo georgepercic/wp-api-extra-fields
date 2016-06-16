@@ -14,7 +14,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       WP API Extra Fields
- * Plugin URI:        http://blog.bestvalue.eu
+ * Plugin URI:        https://github.com/georgepercic/wp-api-extra-fields
  * Description:       A simple plugin to modify the response of the REST API plugin.
  * Version:           1.0.0
  * Author:            George Percic
